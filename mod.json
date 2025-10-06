@@ -1,0 +1,172 @@
+{
+	"geode": "4.7.0",
+	"gd": {
+		"win": "2.2074",
+		"mac": "2.2074",
+		"ios": "2.2074",
+		"android": "2.2074"
+	},
+	"id": "raydeeux.mrjimboree",
+	"name": "YouCanDoIt",
+	"version": "v0.0.1-alpha.1",
+	"developer": "RayDeeUx",
+	"description": "you can do it!!!",
+	"repository": "https://github.com/RayDeeUx/YouCanDoIt",
+	"settings": {
+		"enabled": {
+			"name": "Enabled",
+			"description": "Toggles the mod.",
+			"type": "bool",
+			"default": true
+		},
+		"percentageThreshold": {
+			"name": "Percentage Threshold",
+			"description": "Threshold (in percent) necessary to show Mr. Jim M. Boree",
+			"type": "float",
+			"default": 0.50,
+			"min": 0.00,
+			"max": 100.0
+		},
+		"image": {
+			"name": "Image",
+			"description": "The image you want to show (in case you dislike Mr. Jim M. Boree, for whatever reason).\n\n<c-ffffff>JPG/JPEG files are not allowed.</c>",
+			"type": "file",
+			"default": "{mod_resources_dir}/youCanDoIt.png",
+			"control": {
+				"filters": [
+					{
+						"description": "Image files",
+						"files": [
+							"*.png",
+							"*.gif"
+						]
+					}
+				]
+			}
+		},
+		"moveForDuration": {
+			"name": "Move for... (seconds)",
+			"description": "Duration of the Mr. Jim M. Boree animation. <cy>Does not affect playback speed of optional SFX.</c>",
+			"type": "float",
+			"default": 0.50,
+			"min": 0.10,
+			"max": 10.0
+		},
+		"startMovingFrom": {
+			"name": "Start Moving From...",
+			"description": "The side of the screen you want the image to start moving from.",
+			"type": "string",
+			"default": "Right",
+			"one-of": [
+				"Right",
+				"Left",
+				"Top",
+				"Bottom",
+				"Top Left",
+				"Top Right",
+				"Bottom Left",
+				"Bottom Right"
+			]
+		},
+		"initialScale": {
+			"name": "Initial Scale",
+			"type": "float",
+			"default": 1.00,
+			"min": 0.00,
+			"max": 1.00
+		},
+		"initialOpacity": {
+			"name": "Initial Opacity",
+			"type": "int",
+			"default": 255,
+			"min": 0,
+			"max": 255
+		},
+		"initialRotation": {
+			"name": "Initial Rotation",
+			"type": "float",
+			"default": 0.000,
+			"min": 0.000,
+			"max": 360.0
+		},
+		"moveToX": {
+			"name": "Move to... (X Position) (%)",
+			"type": "int",
+			"default": 50,
+			"min": 0,
+			"max": 100
+		},
+		"moveToY": {
+			"name": "Move to... (Y Position) (%)",
+			"type": "int",
+			"default": 50,
+			"min": 0,
+			"max": 100
+		},
+		"holdForDuration": {
+			"name": "Hold for... (seconds)",
+			"description": "How long Mr. Jim M. Boree should be on screen before fading away. <cy>Does not affect playback speed of optional SFX.</c>",
+			"type": "float",
+			"default": 0.50,
+			"min": 0.10,
+			"max": 5.00
+		},
+		"returnToDuration": {
+			"name": "Move away for... (seconds)",
+			"description": "How long Mr. Jim M. Boree should be on screen before fading away. <cy>Does not affect playback speed of optional SFX.</c>",
+			"type": "float",
+			"default": 1.00,
+			"min": 0.10,
+			"max": 10.0
+		},
+		"sfx": {
+			"name": "SFX",
+			"description": "The SFX you want to play in addition to the image (in case you want it, for whatever reason).",
+			"type": "file",
+			"default": "",
+			"control": {
+				"filters": [
+					{
+						"description": "Audio files",
+						"files": [
+							"*.mp3",
+							"*.oga",
+							"*.ogg",
+							"*.wav",
+							"*.flac"
+						]
+					}
+				]
+			}
+		},
+		"volume": {
+			"name": "SFX Volume (%)",
+			"description": "The volume of the SFX, if you've selected one already.",
+			"type": "int",
+			"default": 50,
+			"min": 0,
+			"max": 100
+		},
+		"logging": {
+			"name": "Logging",
+			"type": "bool",
+			"default": false
+		}
+	},
+	"resources": {
+		"sprites": [
+			"resources/*.png"
+		]
+	},
+	"dependencies": {
+		"prevter.imageplus": ">=1.0.3"
+	},
+	"issues": {
+		"url": "https://discord.com/channels/911701438269386882/1205523212444639292",
+		"info": "Ping me <cl>(@erymanthus)</c> in the Geode SDK Discord server's <cl>#help</c> channel if you need help. <cr>DMs are NOT accepted.</c>"
+	},
+	"links": {
+		"community": "https://discord.gg/WqZBYdBWZW",
+		"homepage": "https://discord.com/channels/822510988409831486/1206371881222144020"
+	}
+}
