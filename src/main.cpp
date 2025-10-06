@@ -25,7 +25,7 @@ class $modify(MyPlayLayer, PlayLayer) {
 	void resetLevel() {
 		PlayLayer::resetLevel();
 		alreadyRan = false;
-		if (!m_uiLayer || m_uiLayer->getChildByID("you-can-do-it"_spr)) return;
+		if (!m_uiLayer || !m_uiLayer->getChildByID("you-can-do-it"_spr)) return;
 		CCNode* mrJimBoree = m_uiLayer->getChildByID("you-can-do-it"_spr);
 		mrJimBoree->stopAllActions();
 		MyPlayLayer::resetMrJimboree(static_cast<CCSprite*>(mrJimBoree));
