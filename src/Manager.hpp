@@ -1,7 +1,5 @@
 #pragma once
 
-#include <regex>
-
 // Manager.hpp structure by acaruso
 // reused with explicit permission and strong encouragement
 
