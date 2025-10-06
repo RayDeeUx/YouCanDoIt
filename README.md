@@ -1,6 +1,8 @@
 # YouCanDoIt
 you can do it!!!
 
+Spawns am image of your choice (Mr. Jim M. Boree by default) when you've almost passed your new best. Comes with optional SFX as well.
+
 Mod suggested by [Mr_JimBoree](https://nitter.net/Mr_JimBoree)/[holyguacamole34](https://nitter.net/holyguacamole34).
 
 Includes PNG and GIF support out of the box, as well as optional SFX.
