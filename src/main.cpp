@@ -97,6 +97,10 @@ class $modify(MyPlayLayer, PlayLayer) {
 		mrJimBoree->setScale(std::clamp<float>(static_cast<float>(Mod::get()->getSettingValue<double>("initialScale")), 0.f, 1.f));
 		mrJimBoree->setOpacity(std::clamp<int>(static_cast<int>(Mod::get()->getSettingValue<int64_t>("initialOpacity")), 0, 255));
 		mrJimBoree->setRotation(std::clamp<float>(static_cast<float>(Mod::get()->getSettingValue<double>("initialRotation")), 0.f, 360.f));
+		mrJimBoree->setColor(Mod::get()->getSettingValue<ccColor3B>("initialColor"));
+
+		mrJimBoree->setCascadeColorEnabled(false);
+		mrJimBoree->setCascadeOpacityEnabled(false);
 	}
 	bool init(GJGameLevel* level, bool p1, bool p2) {
 		if (!PlayLayer::init(level, p1, p2)) return false;
@@ -104,7 +108,7 @@ class $modify(MyPlayLayer, PlayLayer) {
 		if (!Mod::get()->getSettingValue<bool>("enabled")) return true;
 
 		const std::filesystem::path& imagePath = Mod::get()->getSettingValue<std::filesystem::path>("image");
-		if (!std::filesystem::exists(imagePath) || (imagePath.extension() != "png" && imagePath.extension() != "gif")) return true; // moveToEasingType
+		if (!std::filesystem::exists(imagePath) || (imagePath.extension() != ".png" && imagePath.extension() != ".gif")) return true; // moveToEasingType
 
 		CCSprite* mrJimBoree = MyPlayLayer::createSpriteCustom(geode::utils::string::pathToString(imagePath).c_str());
 		if (!mrJimBoree) return true;
@@ -127,18 +131,24 @@ class $modify(MyPlayLayer, PlayLayer) {
 		PlayLayer::updateInfoLabel();
 		if (!m_uiLayer || !m_level || m_level->isPlatformer() || m_isPlatformer || !m_player1 || m_player1->m_isDead || m_isTestMode || m_isPracticeMode) return;
 		if (!enabled || !addedMrJimBoree || alreadyRan || currentlyFormingSequence) return;
+		if (!m_uiLayer->getChildByID("you-can-do-it"_spr)) return;
 
 		const int percent = m_level->m_normalPercent.value();
 		if (percent < 1 || percent > 99) return;
 		if (std::abs(PlayLayer::getCurrentPercent() - static_cast<float>(percent)) > percentageThreshold) return;
 
 		CCSprite* mrJimBoree = static_cast<CCSprite*>(m_uiLayer->getChildByID("you-can-do-it"_spr));
+		MyPlayLayer::resetMrJimboree(mrJimBoree);
+
 		const float moveForDuration = std::clamp<float>(static_cast<float>(Mod::get()->getSettingValue<double>("moveForDuration")), .1f, 10.f);
 		const float returnToDuration = std::clamp<float>(static_cast<float>(Mod::get()->getSettingValue<double>("returnToDuration")), .1f, 10.f);
+
+		const ccColor3B cocosIsFuckingStupid = Mod::get()->getSettingValue<ccColor3B>("colorTo");
 
 		const CCPoint originalPosition = mrJimBoree->getPosition();
 		const GLubyte originalOpacity = mrJimBoree->getOpacity();
 		const float originalRotation = mrJimBoree->getRotation();
+		const ccColor3B originalColor = mrJimBoree->getColor();
 		const float originalScale = mrJimBoree->getScale();
 
 		const CCSize winSize = CCDirector::get()->getWinSize();
@@ -151,6 +161,7 @@ class $modify(MyPlayLayer, PlayLayer) {
 		CCActionInterval* rotateToAction = MyPlayLayer::getEaseTypeForCustomScaleAnimation(CCRotateTo::create(moveForDuration, 0), Mod::get()->getSettingValue<std::string>("scaleToEasingType"), std::clamp<float>(static_cast<float>(Mod::get()->getSettingValue<double>("scaleToEasingRate")), .1f, 4.f));
 		CCActionInterval* scaleToAction = MyPlayLayer::getEaseTypeForCustomScaleAnimation(CCScaleTo::create(moveForDuration, 1.f), Mod::get()->getSettingValue<std::string>("rotateToEasingType"), std::clamp<float>(static_cast<float>(Mod::get()->getSettingValue<double>("rotateToEasingRate")), .1f, 4.f));
 		CCFadeTo* fadeToAction = CCFadeTo::create(moveForDuration, 255);
+		CCTintTo* tintToAction = CCTintTo::create(moveForDuration, cocosIsFuckingStupid.r, cocosIsFuckingStupid.g, cocosIsFuckingStupid.b);
 		CCSpawn* spawnToAction = CCSpawn::create(moveToAction, rotateToAction, scaleToAction, fadeToAction, nullptr);
 
 		CCDelayTime* holdForDuration = CCDelayTime::create(std::clamp<float>(static_cast<float>(Mod::get()->getSettingValue<double>("holdForDuration")), .1f, 5.f) + moveForDuration);
@@ -159,6 +170,7 @@ class $modify(MyPlayLayer, PlayLayer) {
 		CCActionInterval* rotateBackToAction = MyPlayLayer::getEaseTypeForCustomScaleAnimation(CCRotateTo::create(returnToDuration, originalRotation), Mod::get()->getSettingValue<std::string>("scaleBackToEasingType"), std::clamp<float>(static_cast<float>(Mod::get()->getSettingValue<double>("scaleBackToEasingRate")), .1f, 4.f));
 		CCActionInterval* scaleBackToAction = MyPlayLayer::getEaseTypeForCustomScaleAnimation(CCScaleTo::create(returnToDuration, originalScale), Mod::get()->getSettingValue<std::string>("rotateBackToEasingType"), std::clamp<float>(static_cast<float>(Mod::get()->getSettingValue<double>("rotateBackToEasingRate")), .1f, 4.f));
 		CCFadeTo* fadeBackToAction = CCFadeTo::create(returnToDuration, originalOpacity);
+		CCTintTo* tintToAction = CCTintTo::create(moveForDuration, originalColor);
 		CCSpawn* spawnBackToAction = CCSpawn::create(moveBackToAction, rotateBackToAction, scaleBackToAction, fadeBackToAction, nullptr);
 
 		CCSequence* fullSequence = CCSequence::create(spawnToAction, holdForDuration, spawnBackToAction, nullptr);

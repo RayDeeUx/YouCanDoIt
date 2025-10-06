@@ -145,6 +145,12 @@
 			"min": 0.10,
 			"max": 4.00
 		},
+		"initialColor": {
+			"name": "Initial Color",
+			"description": "Why would you want to color Mr. Jim M. Boree? Mr. Jim M. Boree is already perfect.",
+			"type": "color",
+			"default": "#FFFFFF"
+		},
 		"initialOpacity": {
 			"name": "Initial Opacity",
 			"type": "int",
@@ -165,6 +171,12 @@
 			"default": 50,
 			"min": 0,
 			"max": 100
+		},
+		"colorTo": {
+			"name": "Color To...",
+			"description": "Why would you want to color Mr. Jim M. Boree? Mr. Jim M. Boree is already perfect.",
+			"type": "color",
+			"default": "#FFFFFF"
 		},
 		"holdForDuration": {
 			"name": "Hold for... (seconds)",
