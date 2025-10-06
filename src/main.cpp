@@ -159,10 +159,10 @@ class $modify(MyPlayLayer, PlayLayer) {
 
 		CCActionInterval* moveToAction = MyPlayLayer::getEaseTypeForCustomScaleAnimation(CCMoveTo::create(moveForDuration, {xPosAfterCalculation, yPosAfterCalculation}), Mod::get()->getSettingValue<std::string>("moveToEasingType"), std::clamp<float>(static_cast<float>(Mod::get()->getSettingValue<double>("moveToEasingRate")), .1f, 4.f));
 		CCActionInterval* rotateToAction = MyPlayLayer::getEaseTypeForCustomScaleAnimation(CCRotateTo::create(moveForDuration, 0), Mod::get()->getSettingValue<std::string>("scaleToEasingType"), std::clamp<float>(static_cast<float>(Mod::get()->getSettingValue<double>("scaleToEasingRate")), .1f, 4.f));
-		CCActionInterval* scaleToAction = MyPlayLayer::getEaseTypeForCustomScaleAnimation(CCScaleTo::create(moveForDuration, 1.f), Mod::get()->getSettingValue<std::string>("rotateToEasingType"), std::clamp<float>(static_cast<float>(Mod::get()->getSettingValue<double>("rotateToEasingRate")), .1f, 4.f));
+		CCActionInterval* scaleToAction = MyPlayLayer::getEaseTypeForCustomScaleAnimation(CCScaleTo::create(moveForDuration, std::clamp<float>(static_cast<float>(Mod::get()->getSettingValue<double>("scaleTo")), .5f, 1.f)), Mod::get()->getSettingValue<std::string>("rotateToEasingType"), std::clamp<float>(static_cast<float>(Mod::get()->getSettingValue<double>("rotateToEasingRate")), .1f, 4.f));
 		CCFadeTo* fadeToAction = CCFadeTo::create(moveForDuration, 255);
 		CCTintTo* tintToAction = CCTintTo::create(moveForDuration, cocosIsFuckingStupid.r, cocosIsFuckingStupid.g, cocosIsFuckingStupid.b);
-		CCSpawn* spawnToAction = CCSpawn::create(moveToAction, rotateToAction, scaleToAction, fadeToAction, nullptr);
+		CCSpawn* spawnToAction = CCSpawn::create(moveToAction, rotateToAction, scaleToAction, fadeToAction, tintToAction, nullptr);
 
 		CCDelayTime* holdForDuration = CCDelayTime::create(std::clamp<float>(static_cast<float>(Mod::get()->getSettingValue<double>("holdForDuration")), .1f, 5.f) + moveForDuration);
 
@@ -170,8 +170,8 @@ class $modify(MyPlayLayer, PlayLayer) {
 		CCActionInterval* rotateBackToAction = MyPlayLayer::getEaseTypeForCustomScaleAnimation(CCRotateTo::create(returnToDuration, originalRotation), Mod::get()->getSettingValue<std::string>("scaleBackToEasingType"), std::clamp<float>(static_cast<float>(Mod::get()->getSettingValue<double>("scaleBackToEasingRate")), .1f, 4.f));
 		CCActionInterval* scaleBackToAction = MyPlayLayer::getEaseTypeForCustomScaleAnimation(CCScaleTo::create(returnToDuration, originalScale), Mod::get()->getSettingValue<std::string>("rotateBackToEasingType"), std::clamp<float>(static_cast<float>(Mod::get()->getSettingValue<double>("rotateBackToEasingRate")), .1f, 4.f));
 		CCFadeTo* fadeBackToAction = CCFadeTo::create(returnToDuration, originalOpacity);
-		CCTintTo* tintToAction = CCTintTo::create(moveForDuration, originalColor);
-		CCSpawn* spawnBackToAction = CCSpawn::create(moveBackToAction, rotateBackToAction, scaleBackToAction, fadeBackToAction, nullptr);
+		CCTintTo* tintBackToAction = CCTintTo::create(returnToDuration, originalColor.r, originalColor.g, originalColor.b);
+		CCSpawn* spawnBackToAction = CCSpawn::create(moveBackToAction, rotateBackToAction, scaleBackToAction, fadeBackToAction, tintBackToAction, nullptr);
 
 		CCSequence* fullSequence = CCSequence::create(spawnToAction, holdForDuration, spawnBackToAction, nullptr);
 		currentlyFormingSequence = false;

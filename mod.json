@@ -168,9 +168,16 @@
 		"moveToY": {
 			"name": "Move to... (Y Position) (%)",
 			"type": "int",
-			"default": 50,
+			"default": 65,
 			"min": 0,
 			"max": 100
+		},
+		"scaleTo": {
+			"name": "Scale To...",
+			"type": "float",
+			"default": 0.75,
+			"min": 0.50,
+			"max": 1.00
 		},
 		"colorTo": {
 			"name": "Color To...",
