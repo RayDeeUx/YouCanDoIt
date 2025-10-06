@@ -1,3 +1,5 @@
 # YouCanDoIt Changelog
+## v0.0.1-alpha.2
+- Added tags, fixed typo.
 ## v0.0.1-alpha.1
 - Initial release (on GitHub).

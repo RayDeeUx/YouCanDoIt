@@ -8,7 +8,7 @@
 	},
 	"id": "raydeeux.mrjimboree",
 	"name": "YouCanDoIt",
-	"version": "v0.0.1-alpha.1",
+	"version": "v0.0.1-alpha.2",
 	"developer": "RayDeeUx",
 	"description": "you can do it!!!",
 	"repository": "https://github.com/RayDeeUx/YouCanDoIt",
@@ -158,6 +158,10 @@
 			"resources/*.png"
 		]
 	},
+	"tags": [
+		"modtober25", "customization",
+		"joke", "gameplay"
+	],
 	"dependencies": {
 		"prevter.imageplus": ">=1.0.3"
 	},
