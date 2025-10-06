@@ -68,6 +68,27 @@
 				"Bottom Right"
 			]
 		},
+		"moveToEasingType": {
+			"name": "\"Moving In\" Easing Type",
+			"type": "string",
+			"default": "None (Linear)",
+			"one-of": [
+				"None (Linear)",
+				"Ease In", "Ease Out", "Ease In Out",
+				"Back In", "Back Out", "Back In Out",
+				"Bounce In", "Bounce Out", "Bounce In Out",
+				"Elastic In", "Elastic Out", "Elastic In Out",
+				"Exponential In", "Exponential Out", "Exponential In Out",
+				"Sine In", "Sine Out", "Sine In Out"
+			]
+		},
+		"moveToEasingRate": {
+			"name": "\"Moving In\" Easing Rate",
+			"type": "float",
+			"default": 0.60,
+			"min": 0.10,
+			"max": 4.00
+		},
 		"initialScale": {
 			"name": "Initial Scale",
 			"type": "float",
@@ -75,12 +96,26 @@
 			"min": 0.00,
 			"max": 1.00
 		},
-		"initialOpacity": {
-			"name": "Initial Opacity",
-			"type": "int",
-			"default": 255,
-			"min": 0,
-			"max": 255
+		"scaleToEasingType": {
+			"name": "\"Scaling In\" Easing Type",
+			"type": "string",
+			"default": "None (Linear)",
+			"one-of": [
+				"None (Linear)",
+				"Ease In", "Ease Out", "Ease In Out",
+				"Back In", "Back Out", "Back In Out",
+				"Bounce In", "Bounce Out", "Bounce In Out",
+				"Elastic In", "Elastic Out", "Elastic In Out",
+				"Exponential In", "Exponential Out", "Exponential In Out",
+				"Sine In", "Sine Out", "Sine In Out"
+			]
+		},
+		"scaleToEasingRate": {
+			"name": "\"Scaling In\" Easing Rate",
+			"type": "float",
+			"default": 0.60,
+			"min": 0.10,
+			"max": 4.00
 		},
 		"initialRotation": {
 			"name": "Initial Rotation",
@@ -88,6 +123,34 @@
 			"default": 0.000,
 			"min": 0.000,
 			"max": 360.0
+		},
+		"rotateToEasingType": {
+			"name": "\"Rotating In\" Easing Type",
+			"type": "string",
+			"default": "None (Linear)",
+			"one-of": [
+				"None (Linear)",
+				"Ease In", "Ease Out", "Ease In Out",
+				"Back In", "Back Out", "Back In Out",
+				"Bounce In", "Bounce Out", "Bounce In Out",
+				"Elastic In", "Elastic Out", "Elastic In Out",
+				"Exponential In", "Exponential Out", "Exponential In Out",
+				"Sine In", "Sine Out", "Sine In Out"
+			]
+		},
+		"rotateToEasingRate": {
+			"name": "\"Rotating In\" Easing Rate",
+			"type": "float",
+			"default": 0.60,
+			"min": 0.10,
+			"max": 4.00
+		},
+		"initialOpacity": {
+			"name": "Initial Opacity",
+			"type": "int",
+			"default": 255,
+			"min": 0,
+			"max": 255
 		},
 		"moveToX": {
 			"name": "Move to... (X Position) (%)",
@@ -118,6 +181,69 @@
 			"default": 1.00,
 			"min": 0.10,
 			"max": 10.0
+		},
+		"moveBackToEasingType": {
+			"name": "\"Moving Back\" Easing Type",
+			"type": "string",
+			"default": "None (Linear)",
+			"one-of": [
+				"None (Linear)",
+				"Ease In", "Ease Out", "Ease In Out",
+				"Back In", "Back Out", "Back In Out",
+				"Bounce In", "Bounce Out", "Bounce In Out",
+				"Elastic In", "Elastic Out", "Elastic In Out",
+				"Exponential In", "Exponential Out", "Exponential In Out",
+				"Sine In", "Sine Out", "Sine In Out"
+			]
+		},
+		"moveBackToEasingRate": {
+			"name": "\"Moving Back\" Easing Rate",
+			"type": "float",
+			"default": 0.60,
+			"min": 0.10,
+			"max": 4.00
+		},
+		"scaleBackToEasingType": {
+			"name": "\"Scaling Back\" Easing Type",
+			"type": "string",
+			"default": "None (Linear)",
+			"one-of": [
+				"None (Linear)",
+				"Ease In", "Ease Out", "Ease In Out",
+				"Back In", "Back Out", "Back In Out",
+				"Bounce In", "Bounce Out", "Bounce In Out",
+				"Elastic In", "Elastic Out", "Elastic In Out",
+				"Exponential In", "Exponential Out", "Exponential In Out",
+				"Sine In", "Sine Out", "Sine In Out"
+			]
+		},
+		"scaleBackToEasingRate": {
+			"name": "\"Scaling Back\" Easing Rate",
+			"type": "float",
+			"default": 0.60,
+			"min": 0.10,
+			"max": 4.00
+		},
+		"rotateBackToEasingType": {
+			"name": "\"Rotating Back\" Easing Type",
+			"type": "string",
+			"default": "None (Linear)",
+			"one-of": [
+				"None (Linear)",
+				"Ease In", "Ease Out", "Ease In Out",
+				"Back In", "Back Out", "Back In Out",
+				"Bounce In", "Bounce Out", "Bounce In Out",
+				"Elastic In", "Elastic Out", "Elastic In Out",
+				"Exponential In", "Exponential Out", "Exponential In Out",
+				"Sine In", "Sine Out", "Sine In Out"
+			]
+		},
+		"rotateBackToEasingRate": {
+			"name": "\"Rotating Back\" Easing Rate",
+			"type": "float",
+			"default": 0.60,
+			"min": 0.10,
+			"max": 4.00
 		},
 		"sfx": {
 			"name": "SFX",

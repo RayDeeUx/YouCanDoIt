@@ -22,6 +22,38 @@ class $modify(MyPlayLayer, PlayLayer) {
 		delete sprite;
 		return nullptr;
 	}
+	static CCActionInterval* getEaseTypeForCustomScaleAnimation(CCActionInterval* action, const std::string& modStringSetting, const float easingRate) {
+		if (!action) return nullptr;
+		const std::string& easeType = utils::string::toLower(modStringSetting);
+
+		if (easeType == "none (linear)" || easeType == "none" || easeType == "linear") return action;
+
+		if (easeType == "ease in") return CCEaseIn::create(action, easingRate);
+		if (easeType == "ease out") return CCEaseOut::create(action, easingRate);
+		if (easeType == "ease in out") return CCEaseInOut::create(action, easingRate);
+
+		if (easeType == "back in") return CCEaseBackIn::create(action);
+		if (easeType == "back out") return CCEaseBackOut::create(action);
+		if (easeType == "back in out") return CCEaseBackInOut::create(action);
+
+		if (easeType == "bounce in") return CCEaseBounceIn::create(action);
+		if (easeType == "bounce out") return CCEaseBounceOut::create(action);
+		if (easeType == "bounce in out") return CCEaseBounceInOut::create(action);
+
+		if (easeType == "elastic in") return CCEaseElasticIn::create(action, easingRate);
+		if (easeType == "elastic out") return CCEaseElasticOut::create(action, easingRate);
+		if (easeType == "elastic in out") return CCEaseElasticInOut::create(action, easingRate);
+
+		if (easeType == "exponential in") return CCEaseExponentialIn::create(action);
+		if (easeType == "exponential out") return CCEaseExponentialOut::create(action);
+		if (easeType == "exponential in out") return CCEaseExponentialInOut::create(action);
+
+		if (easeType == "sine in") return CCEaseSineIn::create(action);
+		if (easeType == "sine out") return CCEaseSineOut::create(action);
+		if (easeType == "sine in out") return CCEaseSineInOut::create(action);
+
+		return action;
+	}
 	void resetLevel() {
 		PlayLayer::resetLevel();
 		alreadyRan = false;
@@ -72,7 +104,7 @@ class $modify(MyPlayLayer, PlayLayer) {
 		if (!Mod::get()->getSettingValue<bool>("enabled")) return true;
 
 		const std::filesystem::path& imagePath = Mod::get()->getSettingValue<std::filesystem::path>("image");
-		if (!std::filesystem::exists(imagePath) || (imagePath.extension() != "png" && imagePath.extension() != "gif")) return true;
+		if (!std::filesystem::exists(imagePath) || (imagePath.extension() != "png" && imagePath.extension() != "gif")) return true; // moveToEasingType
 
 		CCSprite* mrJimBoree = MyPlayLayer::createSpriteCustom(geode::utils::string::pathToString(imagePath).c_str());
 		if (!mrJimBoree) return true;
@@ -115,17 +147,17 @@ class $modify(MyPlayLayer, PlayLayer) {
 
 		currentlyFormingSequence = true;
 
-		CCMoveTo* moveToAction = CCMoveTo::create(moveForDuration, {xPosAfterCalculation, yPosAfterCalculation});
-		CCRotateTo* rotateToAction = CCRotateTo::create(moveForDuration, 0);
-		CCScaleTo* scaleToAction = CCScaleTo::create(moveForDuration, 1.f);
+		CCActionInterval* moveToAction = MyPlayLayer::getEaseTypeForCustomScaleAnimation(CCMoveTo::create(moveForDuration, {xPosAfterCalculation, yPosAfterCalculation}), Mod::get()->getSettingValue<std::string>("moveToEasingType"), std::clamp<float>(static_cast<float>(Mod::get()->getSettingValue<double>("moveToEasingRate")), .1f, 4.f));
+		CCActionInterval* rotateToAction = MyPlayLayer::getEaseTypeForCustomScaleAnimation(CCRotateTo::create(moveForDuration, 0), Mod::get()->getSettingValue<std::string>("scaleToEasingType"), std::clamp<float>(static_cast<float>(Mod::get()->getSettingValue<double>("scaleToEasingRate")), .1f, 4.f));
+		CCActionInterval* scaleToAction = MyPlayLayer::getEaseTypeForCustomScaleAnimation(CCScaleTo::create(moveForDuration, 1.f), Mod::get()->getSettingValue<std::string>("rotateToEasingType"), std::clamp<float>(static_cast<float>(Mod::get()->getSettingValue<double>("rotateToEasingRate")), .1f, 4.f));
 		CCFadeTo* fadeToAction = CCFadeTo::create(moveForDuration, 255);
 		CCSpawn* spawnToAction = CCSpawn::create(moveToAction, rotateToAction, scaleToAction, fadeToAction, nullptr);
 
 		CCDelayTime* holdForDuration = CCDelayTime::create(std::clamp<float>(static_cast<float>(Mod::get()->getSettingValue<double>("holdForDuration")), .1f, 5.f) + moveForDuration);
 
-		CCMoveTo* moveBackToAction = CCMoveTo::create(returnToDuration, originalPosition);
-		CCRotateTo* rotateBackToAction = CCRotateTo::create(returnToDuration, originalRotation);
-		CCScaleTo* scaleBackToAction = CCScaleTo::create(returnToDuration, originalScale);
+		CCActionInterval* moveBackToAction = MyPlayLayer::getEaseTypeForCustomScaleAnimation(CCMoveTo::create(returnToDuration, originalPosition), Mod::get()->getSettingValue<std::string>("moveBackToEasingType"), std::clamp<float>(static_cast<float>(Mod::get()->getSettingValue<double>("moveBackToEasingRate")), .1f, 4.f));
+		CCActionInterval* rotateBackToAction = MyPlayLayer::getEaseTypeForCustomScaleAnimation(CCRotateTo::create(returnToDuration, originalRotation), Mod::get()->getSettingValue<std::string>("scaleBackToEasingType"), std::clamp<float>(static_cast<float>(Mod::get()->getSettingValue<double>("scaleBackToEasingRate")), .1f, 4.f));
+		CCActionInterval* scaleBackToAction = MyPlayLayer::getEaseTypeForCustomScaleAnimation(CCScaleTo::create(returnToDuration, originalScale), Mod::get()->getSettingValue<std::string>("rotateBackToEasingType"), std::clamp<float>(static_cast<float>(Mod::get()->getSettingValue<double>("rotateBackToEasingRate")), .1f, 4.f));
 		CCFadeTo* fadeBackToAction = CCFadeTo::create(returnToDuration, originalOpacity);
 		CCSpawn* spawnBackToAction = CCSpawn::create(moveBackToAction, rotateBackToAction, scaleBackToAction, fadeBackToAction, nullptr);
 
