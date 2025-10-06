@@ -24,25 +24,14 @@ class $modify(MyPlayLayer, PlayLayer) {
 	}
 	void resetLevel() {
 		PlayLayer::resetLevel();
+		CCNode* mrJimBoree = m_uiLayer->getChildByID("you-can-do-it"_spr);
+		mrJimBoree->stopAllActions();
+		MyPlayLayer::resetMrJimboree(static_cast<CCSprite*>(mrJimBoree));
 		alreadyRan = false;
 	}
-	bool init(GJGameLevel* level, bool p1, bool p2) {
-		if (!PlayLayer::init(level, p1, p2)) return false;
-		if (!m_uiLayer || !level || level->isPlatformer() || m_isPlatformer) return true;
-		if (!Mod::get()->getSettingValue<bool>("enabled")) return true;
-
-		const std::filesystem::path& imagePath = Mod::get()->getSettingValue<std::filesystem::path>("image");
-		if (!std::filesystem::exists(imagePath)) return true;
-
-		CCSprite* mrJimBoree = MyPlayLayer::createSpriteCustom(geode::utils::string::pathToString(imagePath).c_str());
-		if (!mrJimBoree) return true;
-
-		mrJimBoree->setID("you-can-do-it"_spr);
-		m_uiLayer->addChild(mrJimBoree);
-
+	void resetMrJimboree(CCSprite* mrJimBoree) {
 		const CCSize winSize = CCDirector::get()->getWinSize();
 		const std::string& startingPosition = geode::utils::string::toLower(Mod::get()->getSettingValue<std::string>("startMovingFrom"));
-
 		if (startingPosition == "top") {
 			mrJimBoree->setAnchorPoint({.5f, 0.f});
 			mrJimBoree->setPosition({winSize.width * .5f, winSize.height + 100.f});
@@ -75,6 +64,22 @@ class $modify(MyPlayLayer, PlayLayer) {
 		mrJimBoree->setScale(std::clamp<float>(static_cast<float>(Mod::get()->getSettingValue<double>("initialScale")), 0.f, 1.f));
 		mrJimBoree->setOpacity(std::clamp<int>(static_cast<int>(Mod::get()->getSettingValue<int64_t>("initialOpacity")), 0, 255));
 		mrJimBoree->setRotation(std::clamp<float>(static_cast<float>(Mod::get()->getSettingValue<double>("initialRotation")), 0.f, 360.f));
+	}
+	bool init(GJGameLevel* level, bool p1, bool p2) {
+		if (!PlayLayer::init(level, p1, p2)) return false;
+		if (!m_uiLayer || !level || level->isPlatformer() || m_isPlatformer) return true;
+		if (!Mod::get()->getSettingValue<bool>("enabled")) return true;
+
+		const std::filesystem::path& imagePath = Mod::get()->getSettingValue<std::filesystem::path>("image");
+		if (!std::filesystem::exists(imagePath)) return true;
+
+		CCSprite* mrJimBoree = MyPlayLayer::createSpriteCustom(geode::utils::string::pathToString(imagePath).c_str());
+		if (!mrJimBoree) return true;
+
+		mrJimBoree->setID("you-can-do-it"_spr);
+		m_uiLayer->addChild(mrJimBoree);
+
+		MyPlayLayer::resetMrJimboree(mrJimBoree);
 
 		addedMrJimBoree = true;
 
