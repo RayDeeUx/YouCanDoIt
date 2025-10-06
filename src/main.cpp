@@ -87,11 +87,11 @@ class $modify(MyPlayLayer, PlayLayer) {
 	}
 	void updateInfoLabel() {
 		PlayLayer::updateInfoLabel();
-		if (!m_uiLayer || !m_level || m_level->isPlatformer() || m_isPlatformer || !m_player1 || m_player1->m_isDead) return;
+		if (!m_uiLayer || !m_level || m_level->isPlatformer() || m_isPlatformer || !m_player1 || m_player1->m_isDead || m_isTestMode || m_isPracticeMode) return;
 		if (!enabled || !addedMrJimBoree || alreadyRan || currentlyFormingSequence) return;
 
 		const int percent = m_level->m_normalPercent.value();
-		if (percent < 1 || percent > 100) return;
+		if (percent < 1 || percent > 99) return;
 		if (std::abs(PlayLayer::getCurrentPercent() - static_cast<float>(percent)) > percentageThreshold) return;
 
 		CCSprite* mrJimBoree = static_cast<CCSprite*>(m_uiLayer->getChildByID("you-can-do-it"_spr));
