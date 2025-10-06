@@ -72,7 +72,7 @@ class $modify(MyPlayLayer, PlayLayer) {
 		if (!Mod::get()->getSettingValue<bool>("enabled")) return true;
 
 		const std::filesystem::path& imagePath = Mod::get()->getSettingValue<std::filesystem::path>("image");
-		if (!std::filesystem::exists(imagePath)) return true;
+		if (!std::filesystem::exists(imagePath) || (imagePath.extension() != "png" && imagePath.extension() != "gif")) return true;
 
 		CCSprite* mrJimBoree = MyPlayLayer::createSpriteCustom(geode::utils::string::pathToString(imagePath).c_str());
 		if (!mrJimBoree) return true;
