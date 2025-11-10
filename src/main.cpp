@@ -1,4 +1,5 @@
 #include <Geode/modify/PlayLayer.hpp>
+#include "Settings.hpp"
 #include "Manager.hpp"
 
 using namespace geode::prelude;
@@ -14,15 +15,6 @@ double percentageThreshold = -1.f;
 double alternativePercentage = -1.f;
 
 class $modify(MyPlayLayer, PlayLayer) {
-	static CCSprite* createSpriteCustom(const char* pathToFile) {
-		auto sprite = new CCSprite();
-		if (sprite->initWithFile(pathToFile)) {
-			sprite->autorelease();
-			return sprite;
-		}
-		delete sprite;
-		return nullptr;
-	}
 	void resetLevel() {
 		PlayLayer::resetLevel();
 		alreadyRan = false;
@@ -37,9 +29,10 @@ class $modify(MyPlayLayer, PlayLayer) {
 		if (!Mod::get()->getSettingValue<bool>("enabled")) return true;
 
 		const std::filesystem::path& imagePath = Manager::get()->imagePath;
-		if (!std::filesystem::exists(imagePath) || (imagePath.extension() != ".png" && imagePath.extension() != ".gif")) return true;
+		const std::string& extension = geode::utils::string::pathToString(imagePath.extension());
+		if (!std::filesystem::exists(imagePath) || (extension != ".png" && extension != ".gif")) return true;
 
-		CCSprite* mrJimBoree = MyPlayLayer::createSpriteCustom(geode::utils::string::pathToString(imagePath).c_str());
+		CCSprite* mrJimBoree = Manager::createSpriteCustom(geode::utils::string::pathToString(imagePath).c_str());
 		if (!mrJimBoree) return true;
 
 		mrJimBoree->setID("you-can-do-it"_spr);
@@ -82,6 +75,7 @@ class $modify(MyPlayLayer, PlayLayer) {
 };
 
 $on_mod(Loaded) {
+	(void) Mod::get()->registerCustomSettingType("previewjim", &MyButtonSettingV3::parse);
 	enabled = Mod::get()->getSettingValue<bool>("enabled");
 	percentageThreshold = std::clamp<double>(Mod::get()->getSettingValue<double>("percentageThreshold"), 0.f, 100.f);
 	useBestPercentage = Mod::get()->getSettingValue<bool>("useBestPercentage");

@@ -24,6 +24,16 @@ public:
 		return instance;
 	}
 
+	static CCSprite* createSpriteCustom(const char* pathToFile) {
+		auto sprite = new CCSprite();
+		if (sprite->initWithFile(pathToFile)) {
+			sprite->autorelease();
+			return sprite;
+		}
+		delete sprite;
+		return nullptr;
+	}
+
 	static CCActionInterval* getEaseTypeForCustomScaleAnimation(CCActionInterval* action, const std::string& modStringSetting, const float easingRate) {
 		if (!action) return nullptr;
 		const std::string& easeType = utils::string::toLower(modStringSetting);
@@ -129,7 +139,7 @@ public:
 		CCTintTo* tintBackToAction = CCTintTo::create(returnToDuration, originalColor.r, originalColor.g, originalColor.b);
 		CCSpawn* spawnBackToAction = CCSpawn::create(moveBackToAction, rotateBackToAction, scaleBackToAction, fadeBackToAction, tintBackToAction, nullptr);
 
-		CCSequence* fullSequence = CCSequence::create(spawnToAction, holdForDuration, spawnBackToAction, nullptr);
+		CCSequence* fullSequence = PlayLayer::get() && PlayLayer::get()->m_uiLayer && mrJimBoree->getParent() == PlayLayer::get()->m_uiLayer ? CCSequence::create(spawnToAction, holdForDuration, spawnBackToAction, nullptr) : CCSequence::create(spawnToAction, holdForDuration, spawnBackToAction, CCRemoveSelf::create(), nullptr);
 
 		mrJimBoree->runAction(fullSequence);
 

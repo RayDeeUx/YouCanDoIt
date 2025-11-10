@@ -14,6 +14,8 @@ project(YouCanDoIt VERSION 1.0.0)
 add_library(${PROJECT_NAME} SHARED
     src/Manager.hpp
     src/Manager.cpp
+    src/Settings.hpp
+    src/Settings.cpp
     src/main.cpp
     # Add any extra C++ source files here
 )

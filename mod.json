@@ -19,6 +19,10 @@
 			"type": "bool",
 			"default": true
 		},
+		"previewjim": {
+			"name": "Click me to preview Jim!",
+			"type": "custom:previewjim"
+		},
 		"useBestPercentage": {
 			"name": "Use Best Percentage to Trigger Jim",
 			"description": "Use the level's best percentage to show Jim.",
@@ -37,7 +41,7 @@
 		},
 		"percentageThreshold": {
 			"name": "Percentage Threshold",
-			"description": "Threshold (in percent) necessary to show Mr. Jim M. Boree",
+			"description": "Threshold (in percent) necessary to show Mr. Jim M. Boree.",
 			"type": "float",
 			"default": 0.50,
 			"min": 0.00,
