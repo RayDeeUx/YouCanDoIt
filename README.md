@@ -9,4 +9,8 @@ Includes PNG and GIF support out of the box, as well as optional SFX.
 
 Special thanks to [Tride](https://nitter.net/TriDeapthBear) and [ninXout](https://github.com/ninXout) for letting me know about this mod idea.
 
+Additional thanks to [Nwo5](https://github.com/nwo5-trg) for letting me finish this mod in some form.
+
+For those wondering why this mod took longer than expected, go ask Nwo5's parents why they decided to be such jerks.
+
 This [Geode mod](https://geode-sdk.org) is licensed under LGPLv2.
