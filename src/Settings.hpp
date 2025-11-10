@@ -56,7 +56,7 @@ public:
 
 		// copied a bit from louis ck jr
 		theLabel->setScale(.35f);
-		theLabel->limitLabelWidth(300.f, .35f, .25f); // added by Ery. max width is 346.f
+		theLabel->limitLabelWidth(346.f, .35f, .25f); // added by Ery. max width is 346.f
 
 		auto theLabelAsAButton = CCMenuItemSpriteExtra::create(theLabel, this, menu_selector(MyButtonSettingNodeV3::onPreviewJimButton));
 
