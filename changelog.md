@@ -1,4 +1,4 @@
-# JimSaysYouCanDoIt Changelog
+# YouCanDoItSaidJim Changelog
 ## v1.0.0
 - (Mostly) Finished full release!
 - Added settings to allow alternative percents for triggering Jim.

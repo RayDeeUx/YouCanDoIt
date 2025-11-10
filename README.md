@@ -1,4 +1,4 @@
-# JimSaysYouCanDoIt
+# YouCanDoItSaidJim
 you can do it!!!
 
 Spawns an image of your choice (Mr. Jim M. Boree by default) when you've almost passed your new best. Comes with optional SFX as well.
