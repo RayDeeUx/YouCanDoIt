@@ -19,13 +19,30 @@
 			"type": "bool",
 			"default": true
 		},
+		"useBestPercentage": {
+			"name": "Use Best Percentage to Trigger Jim",
+			"description": "Use the level's best percentage to show Jim.",
+			"type": "bool",
+			"default": true,
+			"enable-if": "enabled"
+		},
+		"alternativePercentage": {
+			"name": "Alternative Percentage",
+			"description": "If the  `Use Best Percentage to Trigger Jim`  setting is not enabled, choose the percent you need to reach to show Mr. Jim M. Boree.",
+			"type": "float",
+			"default": 0.50,
+			"min": 0.00,
+			"max": 100.0,
+			"enable-if": "enabled && !useBestPercentage"
+		},
 		"percentageThreshold": {
 			"name": "Percentage Threshold",
 			"description": "Threshold (in percent) necessary to show Mr. Jim M. Boree",
 			"type": "float",
 			"default": 0.50,
 			"min": 0.00,
-			"max": 100.0
+			"max": 100.0,
+			"enable-if": "enabled"
 		},
 		"image": {
 			"name": "Image",
@@ -42,7 +59,8 @@
 						]
 					}
 				]
-			}
+			},
+			"enable-if": "enabled"
 		},
 		"moveForDuration": {
 			"name": "Move for... (seconds)",
@@ -50,7 +68,8 @@
 			"type": "float",
 			"default": 0.50,
 			"min": 0.10,
-			"max": 10.0
+			"max": 10.0,
+			"enable-if": "enabled"
 		},
 		"startMovingFrom": {
 			"name": "Start Moving From...",
@@ -66,7 +85,8 @@
 				"Top Right",
 				"Bottom Left",
 				"Bottom Right"
-			]
+			],
+			"enable-if": "enabled"
 		},
 		"moveToEasingType": {
 			"name": "\"Moving In\" Easing Type",
@@ -80,21 +100,24 @@
 				"Elastic In", "Elastic Out", "Elastic In Out",
 				"Exponential In", "Exponential Out", "Exponential In Out",
 				"Sine In", "Sine Out", "Sine In Out"
-			]
+			],
+			"enable-if": "enabled"
 		},
 		"moveToEasingRate": {
 			"name": "\"Moving In\" Easing Rate",
 			"type": "float",
 			"default": 0.60,
 			"min": 0.10,
-			"max": 4.00
+			"max": 4.00,
+			"enable-if": "enabled"
 		},
 		"initialScale": {
 			"name": "Initial Scale",
 			"type": "float",
 			"default": 1.00,
 			"min": 0.00,
-			"max": 1.00
+			"max": 1.00,
+			"enable-if": "enabled"
 		},
 		"scaleToEasingType": {
 			"name": "\"Scaling In\" Easing Type",
@@ -108,21 +131,24 @@
 				"Elastic In", "Elastic Out", "Elastic In Out",
 				"Exponential In", "Exponential Out", "Exponential In Out",
 				"Sine In", "Sine Out", "Sine In Out"
-			]
+			],
+			"enable-if": "enabled"
 		},
 		"scaleToEasingRate": {
 			"name": "\"Scaling In\" Easing Rate",
 			"type": "float",
 			"default": 0.60,
 			"min": 0.10,
-			"max": 4.00
+			"max": 4.00,
+			"enable-if": "enabled"
 		},
 		"initialRotation": {
 			"name": "Initial Rotation",
 			"type": "float",
 			"default": 0.000,
 			"min": 0.000,
-			"max": 360.0
+			"max": 360.0,
+			"enable-if": "enabled"
 		},
 		"rotateToEasingType": {
 			"name": "\"Rotating In\" Easing Type",
@@ -136,54 +162,62 @@
 				"Elastic In", "Elastic Out", "Elastic In Out",
 				"Exponential In", "Exponential Out", "Exponential In Out",
 				"Sine In", "Sine Out", "Sine In Out"
-			]
+			],
+			"enable-if": "enabled"
 		},
 		"rotateToEasingRate": {
 			"name": "\"Rotating In\" Easing Rate",
 			"type": "float",
 			"default": 0.60,
 			"min": 0.10,
-			"max": 4.00
+			"max": 4.00,
+			"enable-if": "enabled"
 		},
 		"initialColor": {
 			"name": "Initial Color",
 			"description": "Why would you want to color Mr. Jim M. Boree? Mr. Jim M. Boree is already perfect.",
 			"type": "color",
-			"default": "#FFFFFF"
+			"default": "#FFFFFF",
+			"enable-if": "enabled"
 		},
 		"initialOpacity": {
 			"name": "Initial Opacity",
 			"type": "int",
 			"default": 255,
 			"min": 0,
-			"max": 255
+			"max": 255,
+			"enable-if": "enabled"
 		},
 		"moveToX": {
 			"name": "Move to... (X Position) (%)",
 			"type": "int",
 			"default": 50,
 			"min": 0,
-			"max": 100
+			"max": 100,
+			"enable-if": "enabled"
 		},
 		"moveToY": {
 			"name": "Move to... (Y Position) (%)",
 			"type": "int",
 			"default": 65,
 			"min": 0,
-			"max": 100
+			"max": 100,
+			"enable-if": "enabled"
 		},
 		"scaleTo": {
 			"name": "Scale To...",
 			"type": "float",
 			"default": 0.75,
 			"min": 0.50,
-			"max": 1.00
+			"max": 1.00,
+			"enable-if": "enabled"
 		},
 		"colorTo": {
 			"name": "Color To...",
 			"description": "Why would you want to color Mr. Jim M. Boree? Mr. Jim M. Boree is already perfect.",
 			"type": "color",
-			"default": "#FFFFFF"
+			"default": "#FFFFFF",
+			"enable-if": "enabled"
 		},
 		"holdForDuration": {
 			"name": "Hold for... (seconds)",
@@ -191,7 +225,8 @@
 			"type": "float",
 			"default": 0.50,
 			"min": 0.10,
-			"max": 5.00
+			"max": 5.00,
+			"enable-if": "enabled"
 		},
 		"returnToDuration": {
 			"name": "Move away for... (seconds)",
@@ -199,7 +234,8 @@
 			"type": "float",
 			"default": 1.00,
 			"min": 0.10,
-			"max": 10.0
+			"max": 10.0,
+			"enable-if": "enabled"
 		},
 		"moveBackToEasingType": {
 			"name": "\"Moving Back\" Easing Type",
@@ -213,14 +249,16 @@
 				"Elastic In", "Elastic Out", "Elastic In Out",
 				"Exponential In", "Exponential Out", "Exponential In Out",
 				"Sine In", "Sine Out", "Sine In Out"
-			]
+			],
+			"enable-if": "enabled"
 		},
 		"moveBackToEasingRate": {
 			"name": "\"Moving Back\" Easing Rate",
 			"type": "float",
 			"default": 0.60,
 			"min": 0.10,
-			"max": 4.00
+			"max": 4.00,
+			"enable-if": "enabled"
 		},
 		"scaleBackToEasingType": {
 			"name": "\"Scaling Back\" Easing Type",
@@ -234,14 +272,16 @@
 				"Elastic In", "Elastic Out", "Elastic In Out",
 				"Exponential In", "Exponential Out", "Exponential In Out",
 				"Sine In", "Sine Out", "Sine In Out"
-			]
+			],
+			"enable-if": "enabled"
 		},
 		"scaleBackToEasingRate": {
 			"name": "\"Scaling Back\" Easing Rate",
 			"type": "float",
 			"default": 0.60,
 			"min": 0.10,
-			"max": 4.00
+			"max": 4.00,
+			"enable-if": "enabled"
 		},
 		"rotateBackToEasingType": {
 			"name": "\"Rotating Back\" Easing Type",
@@ -255,14 +295,16 @@
 				"Elastic In", "Elastic Out", "Elastic In Out",
 				"Exponential In", "Exponential Out", "Exponential In Out",
 				"Sine In", "Sine Out", "Sine In Out"
-			]
+			],
+			"enable-if": "enabled"
 		},
 		"rotateBackToEasingRate": {
 			"name": "\"Rotating Back\" Easing Rate",
 			"type": "float",
 			"default": 0.60,
 			"min": 0.10,
-			"max": 4.00
+			"max": 4.00,
+			"enable-if": "enabled"
 		},
 		"sfx": {
 			"name": "SFX",
@@ -282,7 +324,8 @@
 						]
 					}
 				]
-			}
+			},
+			"enable-if": "enabled"
 		},
 		"volume": {
 			"name": "SFX Volume (%)",
@@ -290,12 +333,14 @@
 			"type": "int",
 			"default": 50,
 			"min": 0,
-			"max": 100
+			"max": 100,
+			"enable-if": "enabled"
 		},
 		"logging": {
 			"name": "Logging",
 			"type": "bool",
-			"default": false
+			"default": false,
+			"enable-if": "enabled"
 		}
 	},
 	"resources": {

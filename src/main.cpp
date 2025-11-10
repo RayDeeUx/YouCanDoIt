@@ -4,11 +4,14 @@
 using namespace geode::prelude;
 
 bool enabled = false;
+bool useBestPercentage = false;
+
 bool addedMrJimBoree = false;
 bool alreadyRan = false;
 bool currentlyFormingSequence = false;
 
 double percentageThreshold = -1.f;
+double alternativePercentage = -1.f;
 
 class $modify(MyPlayLayer, PlayLayer) {
 	static CCSprite* createSpriteCustom(const char* pathToFile) {
@@ -58,7 +61,7 @@ class $modify(MyPlayLayer, PlayLayer) {
 		if (!enabled || !addedMrJimBoree || alreadyRan || currentlyFormingSequence) return;
 		if (!m_uiLayer->getChildByID("you-can-do-it"_spr)) return;
 
-		const int percent = m_level->m_normalPercent.value();
+		const double percent = useBestPercentage ? m_level->m_normalPercent.value() : alternativePercentage;
 		if (percent < 1 || percent > 99) return;
 		if (std::abs(PlayLayer::getCurrentPercent() - static_cast<float>(percent)) > percentageThreshold) return;
 
@@ -81,14 +84,22 @@ class $modify(MyPlayLayer, PlayLayer) {
 $on_mod(Loaded) {
 	enabled = Mod::get()->getSettingValue<bool>("enabled");
 	percentageThreshold = Mod::get()->getSettingValue<double>("percentageThreshold");
+	useBestPercentage = Mod::get()->getSettingValue<bool>("useBestPercentage");
+	alternativePercentage = Mod::get()->getSettingValue<double>("alternativePercentage");
 	Manager::get()->sfxPath = Mod::get()->getSettingValue<std::filesystem::path>("sfx");
 	Manager::get()->imagePath = Mod::get()->getSettingValue<std::filesystem::path>("image");
 	Mod::get()->setLoggingEnabled(Mod::get()->getSettingValue<bool>("logging"));
 	listenForSettingChanges<bool>("enabled", [](bool newEnabled) {
 		enabled = newEnabled;
 	});
+	listenForSettingChanges<bool>("useBestPercentage", [](bool newUseBestPercentage) {
+		useBestPercentage = newUseBestPercentage;
+	});
 	listenForSettingChanges<double>("percentageThreshold", [](double newPercentageThreshold) {
 		percentageThreshold = newPercentageThreshold;
+	});
+	listenForSettingChanges<double>("alternativePercentage", [](double newAlternativePercentage) {
+		alternativePercentage = newAlternativePercentage;
 	});
 	listenForSettingChanges<std::filesystem::path>("sfx", [](const std::filesystem::path& newSFXPath) {
 		Manager::get()->sfxPath = newSFXPath;
