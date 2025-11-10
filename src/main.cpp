@@ -88,7 +88,7 @@ $on_mod(Loaded) {
 	useBestPercentage = Mod::get()->getSettingValue<bool>("useBestPercentage");
 	useAltPercentOnlyOnCompletedLevels = Mod::get()->getSettingValue<bool>("useAltPercentOnlyOnCompletedLevels");
 	percentageThreshold = std::clamp<double>(Mod::get()->getSettingValue<double>("percentageThreshold"), 0.f, 100.f);
-	alternativePercentage = std::clamp<double>(Mod::get()->getSettingValue<double>("alternativePercentage"), 5.f, 100.f);
+	alternativePercentage = std::clamp<double>(Mod::get()->getSettingValue<double>("alternativePercentage"), 1.f, 100.f);
 	Manager::get()->sfxPath = Mod::get()->getSettingValue<std::filesystem::path>("sfx");
 	Manager::get()->imagePath = Mod::get()->getSettingValue<std::filesystem::path>("image");
 	Mod::get()->setLoggingEnabled(Mod::get()->getSettingValue<bool>("logging"));
@@ -105,7 +105,7 @@ $on_mod(Loaded) {
 		percentageThreshold = std::clamp<double>(newPercentageThreshold, 0.f, 100.f);
 	});
 	listenForSettingChanges<double>("alternativePercentage", [](double newAlternativePercentage) {
-		alternativePercentage = std::clamp<double>(newAlternativePercentage, 5.f, 100.f);
+		alternativePercentage = std::clamp<double>(newAlternativePercentage, 1.f, 100.f);
 	});
 	listenForSettingChanges<std::filesystem::path>("sfx", [](const std::filesystem::path& newSFXPath) {
 		Manager::get()->sfxPath = newSFXPath;

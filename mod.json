@@ -35,12 +35,13 @@
 			"description": "If  `Use Best Percentage to Trigger Jim`  is not enabled, choose the percent you need to reach to show Mr. Jim M. Boree.",
 			"type": "float",
 			"default": 5.00,
-			"min": 5.00,
+			"min": 1.00,
 			"max": 100.0,
 			"enable-if": "enabled && !useBestPercentage"
 		},
 		"useAltPercentOnlyOnCompletedLevels": {
 			"name": "Only Use Alternative Percentage to Trigger Jim If Level Completed Before",
+			"description": "When playing levels you haven't completed before, use your best percentage to show Jim.",
 			"type": "bool",
 			"default": true,
 			"enable-if": "enabled && !useBestPercentage"
