@@ -26,8 +26,8 @@ class $modify(MyPlayLayer, PlayLayer) {
 	void resetLevel() {
 		PlayLayer::resetLevel();
 		alreadyRan = false;
-		if (!m_uiLayer || !m_uiLayer->getChildByID("you-can-do-it"_spr)) return;
 		CCNode* mrJimBoree = m_uiLayer->getChildByID("you-can-do-it"_spr);
+		if (!m_uiLayer || !mrJimBoree) return;
 		mrJimBoree->stopAllActions();
 		Manager::resetMrJimboree(static_cast<CCSprite*>(mrJimBoree));
 	}
@@ -37,7 +37,7 @@ class $modify(MyPlayLayer, PlayLayer) {
 		if (!Mod::get()->getSettingValue<bool>("enabled")) return true;
 
 		const std::filesystem::path& imagePath = Manager::get()->imagePath;
-		if (!std::filesystem::exists(imagePath) || (imagePath.extension() != ".png" && imagePath.extension() != ".gif")) return true; // moveToEasingType
+		if (!std::filesystem::exists(imagePath) || (imagePath.extension() != ".png" && imagePath.extension() != ".gif")) return true;
 
 		CCSprite* mrJimBoree = MyPlayLayer::createSpriteCustom(geode::utils::string::pathToString(imagePath).c_str());
 		if (!mrJimBoree) return true;
@@ -59,13 +59,15 @@ class $modify(MyPlayLayer, PlayLayer) {
 		PlayLayer::updateInfoLabel();
 		if (!m_uiLayer || !m_level || m_level->isPlatformer() || m_isPlatformer || !m_player1 || m_player1->m_isDead || m_isTestMode || m_isPracticeMode) return;
 		if (!enabled || !addedMrJimBoree || alreadyRan || currentlyFormingSequence) return;
+
+		CCNode* jim = m_uiLayer->getChildByID("you-can-do-it"_spr);
 		if (!m_uiLayer->getChildByID("you-can-do-it"_spr)) return;
 
 		const double percent = useBestPercentage ? m_level->m_normalPercent.value() : alternativePercentage;
 		if (percent < 1 || percent > 99) return;
 		if (std::abs(PlayLayer::getCurrentPercent() - static_cast<float>(percent)) > percentageThreshold) return;
 
-		CCSprite* mrJimBoree = static_cast<CCSprite*>(m_uiLayer->getChildByID("you-can-do-it"_spr));
+		CCSprite* mrJimBoree = static_cast<CCSprite*>(jim);
 		Manager::resetMrJimboree(mrJimBoree);
 
 		currentlyFormingSequence = true;
