@@ -60,8 +60,8 @@ class $modify(MyPlayLayer, PlayLayer) {
 
 		double percent = normalPercent;
 		if (!useBestPercentage) {
-			if (useAltPercentOnlyOnCompletedLevels && normalPercent > 99) percent = normalPercent;
-			else percent = alternativePercentage;
+			if (useAltPercentOnlyOnCompletedLevels && normalPercent > 99) percent = alternativePercentage;
+			else percent = normalPercent;
 		}
 		if (percent >= 100.) return;
 		if (std::abs(PlayLayer::getCurrentPercent() - static_cast<float>(percent)) > percentageThreshold) return;
