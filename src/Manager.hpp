@@ -133,8 +133,8 @@ public:
 
 		mrJimBoree->runAction(fullSequence);
 
-		if (!std::filesystem::exists(sfxPath)) return;
 		Manager* manager = Manager::get();
+		if (!std::filesystem::exists(manager->sfxPath)) return;
 		manager->system->playSound(manager->sound, nullptr, false, &manager->channel);
 		manager->channel->setVolume(static_cast<float>(std::clamp<int>(static_cast<int>(Mod::get()->getSettingValue<int64_t>("volume")), 0, 100)) / 100.f);
 	}
