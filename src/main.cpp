@@ -6,6 +6,7 @@ using namespace geode::prelude;
 
 bool enabled = false;
 bool useBestPercentage = false;
+bool useAltPercentOnlyOnCompletedLevels = false;
 
 bool addedMrJimBoree = false;
 bool alreadyRan = false;
@@ -54,8 +55,15 @@ class $modify(MyPlayLayer, PlayLayer) {
 		CCNode* jim = m_uiLayer->getChildByID("you-can-do-it"_spr);
 		if (!m_uiLayer->getChildByID("you-can-do-it"_spr)) return;
 
-		const double percent = useBestPercentage ? m_level->m_normalPercent.value() : alternativePercentage;
-		if (percent < 1 || percent > 99) return;
+		const int normalPercent = m_level->m_normalPercent.value();
+		if (normalPercent < 1) return;
+
+		double percent = normalPercent;
+		if (!useBestPercentage) {
+			if (useAltPercentOnlyOnCompletedLevels && normalPercent > 99) percent = normalPercent;
+			else percent = alternativePercentage;
+		}
+		if (percent >= 100.) return;
 		if (std::abs(PlayLayer::getCurrentPercent() - static_cast<float>(percent)) > percentageThreshold) return;
 
 		CCSprite* mrJimBoree = static_cast<CCSprite*>(jim);
@@ -77,8 +85,9 @@ class $modify(MyPlayLayer, PlayLayer) {
 $on_mod(Loaded) {
 	(void) Mod::get()->registerCustomSettingType("previewjim", &MyButtonSettingV3::parse);
 	enabled = Mod::get()->getSettingValue<bool>("enabled");
-	percentageThreshold = std::clamp<double>(Mod::get()->getSettingValue<double>("percentageThreshold"), 0.f, 100.f);
 	useBestPercentage = Mod::get()->getSettingValue<bool>("useBestPercentage");
+	useAltPercentOnlyOnCompletedLevels = Mod::get()->getSettingValue<bool>("useAltPercentOnlyOnCompletedLevels");
+	percentageThreshold = std::clamp<double>(Mod::get()->getSettingValue<double>("percentageThreshold"), 0.f, 100.f);
 	alternativePercentage = std::clamp<double>(Mod::get()->getSettingValue<double>("alternativePercentage"), 5.f, 100.f);
 	Manager::get()->sfxPath = Mod::get()->getSettingValue<std::filesystem::path>("sfx");
 	Manager::get()->imagePath = Mod::get()->getSettingValue<std::filesystem::path>("image");
@@ -88,6 +97,9 @@ $on_mod(Loaded) {
 	});
 	listenForSettingChanges<bool>("useBestPercentage", [](bool newUseBestPercentage) {
 		useBestPercentage = newUseBestPercentage;
+	});
+	listenForSettingChanges<bool>("useAltPercentOnlyOnCompletedLevels", [](bool newUseAltPercentOnlyOnCompletedLevels) {
+		useAltPercentOnlyOnCompletedLevels = newUseAltPercentOnlyOnCompletedLevels;
 	});
 	listenForSettingChanges<double>("percentageThreshold", [](double newPercentageThreshold) {
 		percentageThreshold = std::clamp<double>(newPercentageThreshold, 0.f, 100.f);

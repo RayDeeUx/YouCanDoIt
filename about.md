@@ -1,7 +1,9 @@
-# YouCanDoIt
+# JimSaysYouCanDoIt
 you can do it!!!
 
 Spawns an image of your choice (Mr. Jim M. Boree by default) when you've almost passed your new best. Comes with optional SFX as well.
+
+For obvious reasons, platformer levels are not supported.
 
 Mod suggested by [Mr_JimBoree](https://nitter.net/Mr_JimBoree)/[holyguacamole34](https://nitter.net/holyguacamole34).
 
