@@ -85,9 +85,9 @@ class $modify(MyPlayLayer, PlayLayer) {
 
 $on_mod(Loaded) {
 	enabled = Mod::get()->getSettingValue<bool>("enabled");
-	percentageThreshold = Mod::get()->getSettingValue<double>("percentageThreshold");
+	percentageThreshold = std::clamp<double>(Mod::get()->getSettingValue<double>("percentageThreshold"), 0.f, 100.f);
 	useBestPercentage = Mod::get()->getSettingValue<bool>("useBestPercentage");
-	alternativePercentage = Mod::get()->getSettingValue<double>("alternativePercentage");
+	alternativePercentage = std::clamp<double>(Mod::get()->getSettingValue<double>("alternativePercentage"), 5.f, 100.f);
 	Manager::get()->sfxPath = Mod::get()->getSettingValue<std::filesystem::path>("sfx");
 	Manager::get()->imagePath = Mod::get()->getSettingValue<std::filesystem::path>("image");
 	Mod::get()->setLoggingEnabled(Mod::get()->getSettingValue<bool>("logging"));
@@ -98,10 +98,10 @@ $on_mod(Loaded) {
 		useBestPercentage = newUseBestPercentage;
 	});
 	listenForSettingChanges<double>("percentageThreshold", [](double newPercentageThreshold) {
-		percentageThreshold = newPercentageThreshold;
+		percentageThreshold = std::clamp<double>(newPercentageThreshold, 0.f, 100.f);
 	});
 	listenForSettingChanges<double>("alternativePercentage", [](double newAlternativePercentage) {
-		alternativePercentage = newAlternativePercentage;
+		alternativePercentage = std::clamp<double>(newAlternativePercentage, 5.f, 100.f);
 	});
 	listenForSettingChanges<std::filesystem::path>("sfx", [](const std::filesystem::path& newSFXPath) {
 		Manager::get()->sfxPath = newSFXPath;
