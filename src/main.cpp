@@ -49,9 +49,7 @@ class $modify(MyPlayLayer, PlayLayer) {
 
 		addedMrJimBoree = true;
 
-		Manager* manager = Manager::get();
-		if (!std::filesystem::exists(manager->sfxPath)) return true;
-		manager->system->createSound(geode::utils::string::pathToString(manager->sfxPath).c_str(), FMOD_DEFAULT, nullptr, &manager->sound);
+		Manager::createSFX();
 
 		return true;
 	}

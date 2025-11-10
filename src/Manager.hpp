@@ -138,4 +138,10 @@ public:
 		manager->system->playSound(manager->sound, nullptr, false, &manager->channel);
 		manager->channel->setVolume(static_cast<float>(std::clamp<int>(static_cast<int>(Mod::get()->getSettingValue<int64_t>("volume")), 0, 100)) / 100.f);
 	}
+
+	static void createSFX() {
+		Manager* manager = Manager::get();
+		if (!std::filesystem::exists(manager->sfxPath)) return;
+		manager->system->createSound(geode::utils::string::pathToString(manager->sfxPath).c_str(), FMOD_DEFAULT, nullptr, &manager->sound);
+	}
 };
