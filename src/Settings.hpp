@@ -46,7 +46,7 @@ public:
 
 		if (auto oldJimboree = geode::OverlayManager::get()->getChildByID("you-can-do-it"_spr); oldJimboree) {
 			oldJimboree->stopAllActions();
-			oldJimboree->removeFromParentAndCleanup();
+			oldJimboree->removeMeAndCleanup();
 		}
 
 		geode::OverlayManager::get()->addChild(mrJimboree);
