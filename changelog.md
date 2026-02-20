@@ -1,4 +1,6 @@
 # YouCanDoItSaidJim Changelog
+## v1.0.1
+- Port to GD 2.2081.
 ## v1.0.0
 - (Mostly) Finished full release!
 - Added settings to allow alternative percents for triggering Jim.

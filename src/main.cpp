@@ -36,7 +36,6 @@ class $modify(MyPlayLayer, PlayLayer) {
 		CCSprite* mrJimBoree = Manager::createSpriteCustom(geode::utils::string::pathToString(imagePath).c_str());
 		if (!mrJimBoree) return true;
 
-		mrJimBoree->setID("you-can-do-it"_spr);
 		m_uiLayer->addChild(mrJimBoree);
 
 		Manager::resetMrJimboree(mrJimBoree);

@@ -43,7 +43,13 @@ public:
 		Manager::createSFX();
 		CCSprite* mrJimboree = Manager::createSpriteCustom(geode::utils::string::pathToString(Manager::get()->imagePath).c_str());
 		if (!mrJimboree) return FLAlertLayer::create("Oh No!", "You don't have a valid image file for Jim!\n\nPlease choose a valid image in the mod settings.", "I Understand")->show();
-		CCScene::get()->addChild(mrJimboree);
+
+		if (auto oldJimboree = geode::OverlayManager::get()->getChildByID("you-can-do-it"_spr); oldJimboree) {
+			oldJimboree->stopAllActions();
+			oldJimboree->removeFromParentAndCleanup();
+		}
+
+		geode::OverlayManager::get()->addChild(mrJimboree);
 		Manager::resetMrJimboree(mrJimboree);
 		Manager::animateMrJimboree(mrJimboree);
 	}
