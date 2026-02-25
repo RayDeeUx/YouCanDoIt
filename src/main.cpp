@@ -36,16 +36,17 @@ class $modify(MyPlayLayer, PlayLayer) {
 		CCSprite* mrJimBoree = Manager::createSpriteCustom(geode::utils::string::pathToString(imagePath).c_str());
 		if (!mrJimBoree) return true;
 
+		mrJimBoree->setID("you-can-do-it"_spr);
 		m_uiLayer->addChild(mrJimBoree);
 		Manager::resetMrJimboree(mrJimBoree);
-		mrJimBoree->schedule(schedule_selector(MyPlayLayer::mrJimboreeUpdate));
 		addedMrJimBoree = true;
 
 		Manager::createSFX();
 
 		return true;
 	}
-	void mrJimboreeUpdate(float) {
+	void updateInfoLabel() {
+		PlayLayer::updateInfoLabel();
 		if (!m_uiLayer || !m_level || m_level->isPlatformer() || m_isPlatformer || !m_player1 || m_player1->m_isDead || m_isTestMode || m_isPracticeMode) return;
 		if (!enabled || !addedMrJimBoree || alreadyRan || currentlyFormingSequence) return;
 
