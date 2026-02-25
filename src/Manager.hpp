@@ -13,7 +13,7 @@ public:
 	
 	FMOD::Sound* sound {};
 	FMOD::Channel* channel {};
-	FMOD::DSP* lowPassFilterDSP {};
+
 	FMOD::System* system = FMODAudioEngine::sharedEngine()->m_system;
 
 	std::filesystem::path sfxPath;

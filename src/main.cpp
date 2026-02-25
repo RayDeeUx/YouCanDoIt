@@ -37,17 +37,15 @@ class $modify(MyPlayLayer, PlayLayer) {
 		if (!mrJimBoree) return true;
 
 		m_uiLayer->addChild(mrJimBoree);
-
 		Manager::resetMrJimboree(mrJimBoree);
-
+		mrJimBoree->schedule(schedule_selector(MyPlayLayer::mrJimboreeUpdate));
 		addedMrJimBoree = true;
 
 		Manager::createSFX();
 
 		return true;
 	}
-	void updateInfoLabel() {
-		PlayLayer::updateInfoLabel();
+	void mrJimboreeUpdate(float) {
 		if (!m_uiLayer || !m_level || m_level->isPlatformer() || m_isPlatformer || !m_player1 || m_player1->m_isDead || m_isTestMode || m_isPracticeMode) return;
 		if (!enabled || !addedMrJimBoree || alreadyRan || currentlyFormingSequence) return;
 
@@ -62,7 +60,7 @@ class $modify(MyPlayLayer, PlayLayer) {
 			if (useAltPercentOnlyOnCompletedLevels && normalPercent > 99) percent = alternativePercentage;
 			else percent = normalPercent;
 		}
-		if (percent >= 100.) return;
+		if (percent >= 100.f) return;
 		if (std::abs(PlayLayer::getCurrentPercent() - static_cast<float>(percent)) > percentageThreshold) return;
 
 		CCSprite* mrJimBoree = static_cast<CCSprite*>(jim);
@@ -71,6 +69,7 @@ class $modify(MyPlayLayer, PlayLayer) {
 		currentlyFormingSequence = true;
 		Manager::animateMrJimboree(mrJimBoree);
 		currentlyFormingSequence = false;
+
 		alreadyRan = true;
 	}
 	void onQuit() {
