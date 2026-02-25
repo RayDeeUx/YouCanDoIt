@@ -1,4 +1,6 @@
 # YouCanDoItSaidJim Changelog
+## v1.0.2
+- Fix a ***__REALLY__*** stupid oversight.
 ## v1.0.1
 - Port to GD 2.2081.
 ## v1.0.0
