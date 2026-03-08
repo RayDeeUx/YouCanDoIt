@@ -19,6 +19,8 @@ public:
 	std::filesystem::path sfxPath;
 	std::filesystem::path imagePath;
 
+	CCSprite* jimBoreeSprite = nullptr;
+
 	static Manager* get() {
 		if (!instance) instance = new Manager();
 		return instance;

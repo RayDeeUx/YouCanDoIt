@@ -16,11 +16,17 @@ double percentageThreshold = -1.f;
 double alternativePercentage = -1.f;
 
 class $modify(MyPlayLayer, PlayLayer) {
+	struct Fields {
+		~Fields() {
+			Manager::get()->jimBoreeSprite = nullptr;
+		}
+	};
 	void resetLevel() {
 		PlayLayer::resetLevel();
 		alreadyRan = false;
-		CCNode* mrJimBoree = m_uiLayer->getChildByID("you-can-do-it"_spr);
-		if (!m_uiLayer || !mrJimBoree) return;
+		CCNode* mrJimBoree = Manager::get()->jimBoreeSprite;
+		if (!mrJimBoree && m_uiLayer) mrJimBoree = m_uiLayer->getChildByID("you-can-do-it"_spr);
+		if (!mrJimBoree) return;
 		mrJimBoree->stopAllActions();
 		Manager::resetMrJimboree(static_cast<CCSprite*>(mrJimBoree));
 	}
@@ -37,6 +43,8 @@ class $modify(MyPlayLayer, PlayLayer) {
 		if (!mrJimBoree) return true;
 
 		mrJimBoree->setID("you-can-do-it"_spr);
+		Manager::get()->jimBoreeSprite = mrJimBoree;
+
 		m_uiLayer->addChild(mrJimBoree);
 		Manager::resetMrJimboree(mrJimBoree);
 		addedMrJimBoree = true;
@@ -50,8 +58,9 @@ class $modify(MyPlayLayer, PlayLayer) {
 		if (!m_uiLayer || !m_level || m_level->isPlatformer() || m_isPlatformer || !m_player1 || m_player1->m_isDead || m_isTestMode || m_isPracticeMode) return;
 		if (!enabled || !addedMrJimBoree || alreadyRan || currentlyFormingSequence) return;
 
-		CCNode* jim = m_uiLayer->getChildByID("you-can-do-it"_spr);
-		if (!m_uiLayer->getChildByID("you-can-do-it"_spr)) return;
+		CCNode* jim = Manager::get()->jimBoreeSprite;
+		if (!jim && m_uiLayer) jim = m_uiLayer->getChildByID("you-can-do-it"_spr);
+		if (!jim) return;
 
 		const int normalPercent = m_level->m_normalPercent.value();
 		if (normalPercent < 1) return;
