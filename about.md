@@ -8,13 +8,15 @@ Spawns an image of your choice (Mr. Jim M. Boree by default) when you've almost 
 
 For obvious reasons, platformer levels are not supported.
 
-Mod suggested by [Mr_JimBoree](https://nitter.net/Mr_JimBoree)/[holyguacamole34](https://nitter.net/holyguacamole34).
+Mod suggested by [Mr_JimBoree](https://nitter.catsarch.com/Mr_JimBoree)/[holyguacamole34](https://nitter.catsarch.com/holyguacamole34).
+
+<c-aaaaaa>*Mr. Jim M. Boree is an original character by [Zeronium](https://www.youtube.com/@Zeronium) and [Bulbazorio](https://nitter.catsarch.com/Bulbazorio), based on the Normal difficulty texture by RobTop.*</c>
 
 Includes PNG and GIF support out of the box, as well as optional SFX.
 
-Special thanks to [Tride](https://nitter.net/TriDeapthBear) and [ninXout](https://github.com/ninXout) for letting me know about this mod idea.
+Special thanks to [Tride](https://nitter.catsarch.com/TriDeapthBear) and [ninXout](https://github.com/ninXout) for letting me know about this mod idea.
 
-Additional thanks to [Nwo5](https://github.com/nwo5-trg) for letting me finish this mod in some form, even after we had agreed to work on this together only for life to get in the way.
+Additional thanks to [Nwo5](https://github.com/nwo5-trg) for letting me finish this mod in some form, even after we had agreed to work on this together (only for life to get in the way).
 
 For those wondering why this mod took longer than expected, go ask Nwo5's parents why they decided to be such jerks.
 
