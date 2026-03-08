@@ -1,4 +1,7 @@
 # YouCanDoItSaidJim
+
+### <c-ffff55>As seen on</c> <c-ff0000>You</c>Tube<c-ffff55>!</c> ([Zeronium](https://www.youtube.com/watch?v=RORfLAdnB4s&t=138s))
+
 you can do it!!!
 
 Spawns an image of your choice (Mr. Jim M. Boree by default) when you've almost passed your new best. Comes with optional SFX as well.
