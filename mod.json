@@ -1,5 +1,5 @@
 {
-	"geode": "5.0.1",
+	"geode": "5.4.1",
 	"gd": {
 		"win": "2.2081",
 		"mac": "2.2081",
@@ -8,7 +8,7 @@
 	},
 	"id": "raydeeux.mrjimboree",
 	"name": "YouCanDoItSaidJim",
-	"version": "v1.0.3",
+	"version": "v1.0.4",
 	"developers": ["RayDeeUx", "Nwo5"],
 	"description": "you can do it!!! (Shows an image every time you're near your best score.)",
 	"repository": "https://github.com/RayDeeUx/YouCanDoIt",
@@ -66,6 +66,7 @@
 						"description": "Image files",
 						"files": [
 							"*.png",
+							"*.webp",
 							"*.gif"
 						]
 					}

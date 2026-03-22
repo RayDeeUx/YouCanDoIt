@@ -1,4 +1,6 @@
 # YouCanDoItSaidJim Changelog
+## v1.0.4
+- Refactor even more things to avoid silly crashes.
 ## v1.0.3
 - Refactor a few things to hopefully prevent really stupid oversights like the one from v1.0.1 in the future.
   - Apparently I forgot to give Jim a node ID.

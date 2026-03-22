@@ -19,7 +19,7 @@ public:
 	std::filesystem::path sfxPath;
 	std::filesystem::path imagePath;
 
-	CCSprite* jimBoreeSprite = nullptr;
+	geode::Ref<CCSprite> jimBoreeSprite = nullptr;
 
 	static Manager* get() {
 		if (!instance) instance = new Manager();

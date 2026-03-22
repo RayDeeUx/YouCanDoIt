@@ -34,10 +34,12 @@ class $modify(MyPlayLayer, PlayLayer) {
 		if (!PlayLayer::init(level, p1, p2)) return false;
 		if (!m_uiLayer || !level || level->isPlatformer() || m_isPlatformer) return true;
 		if (!Mod::get()->getSettingValue<bool>("enabled")) return true;
+		
+		m_fields.self(); // DO NOT REMOVE THIS.
 
 		const std::filesystem::path& imagePath = Manager::get()->imagePath;
 		const std::string& extension = geode::utils::string::pathToString(imagePath.extension());
-		if (!std::filesystem::exists(imagePath) || (extension != ".png" && extension != ".gif")) return true;
+		if (!std::filesystem::exists(imagePath) || (extension != ".png" && extension != ".webp" && extension != ".gif")) return true;
 
 		CCSprite* mrJimBoree = Manager::createSpriteCustom(geode::utils::string::pathToString(imagePath).c_str());
 		if (!mrJimBoree) return true;
